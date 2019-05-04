@@ -26,30 +26,21 @@ body {
 
 h1{
 	font-weight: 700;
-	font-size: 200px;
 	margin: auto;
-	margin-top: 50px;
-	margin-bottom: 50px;
 }
 
 h2{
 	font-weight: 600;
-	font-size: 24px;
 	margin: auto;
-	margin-top: 25px;
-	margin-bottom: 25px;
 }
 
 h3{
 	font-weight: 500;
-	font-size: 16px;
 	margin: auto;
-	margin-top: 10px;
-	margin-bottom: 10px;
 }
 
 p {
-	font-size: 8px;
+	font-size: 12px;
 	font-weight: 300;
 	margin: auto;
 	position: fixed;
@@ -67,8 +58,10 @@ p {
 
 <script>
 
-
 function load() {
+
+	sizeText();
+	
 	var result = document.getElementById('result');
 	var darnElement = document.getElementById('darn');
 	var tomorrowElement = document.getElementById('tomorrow');
@@ -94,6 +87,38 @@ function load() {
 	result.innerHTML = output
 	darnElement.innerHTML = darn
 	tomorrowElement.innerHTML = tomorrow
+	
+	
+	
+}
+
+window.onresize = function(){sizeText()};
+
+function sizeText() {
+	
+	var width = window.innerWidth
+	var height = window.innerHeight
+	//short for criticalDimension
+	var critDim
+	
+	if (width < height){
+		critDim = width
+	} else {
+		critDim = height
+	}
+	
+	h1Size = (critDim + 200) * 0.2
+	h2Size = h1Size * 0.1
+	h3Size = h2Size * 0.5
+	
+	h1Margin = h1Size * 0.2
+	h2Margin = h2Size * 0.5
+	h3Margin = h3Size * 0.5
+	
+	var css = document.createElement('style');
+	css.innerHTML = `h1{font-size: ${h1Size}px; margin-top: ${h1Margin}px; margin-bottom: ${h1Margin}px;} h2{font-size: ${h2Size}px; margin-top: ${h2Margin}px; margin-bottom: ${h2Margin}px;} h3{font-size: ${h3Size}px; margin-top: ${h3Margin}px; margin-bottom: ${h3Margin}px;}`;
+	document.body.appendChild(css);
+	
 }
 
 </script>
